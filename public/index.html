@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC Maker</title>
+    <!-- KoPub 돋움체 웹폰트 추가 -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-kopubworld@1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 커스텀 스타일 -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-8">
+            <div class="logo-container mb-3">
+                <!-- SVG 로고로 대체 -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="220" height="50" viewBox="0 0 220 50" class="inline-block">
+                    <g>
+                        <rect x="10" y="10" width="40" height="30" rx="3" fill="#e74c3c"/>
+                        <text x="22" y="32" fill="white" font-family="Arial" font-weight="bold" font-size="20">R</text>
+                    </g>
+                    <g>
+                        <rect x="55" y="10" width="40" height="30" rx="3" fill="#e74c3c"/>
+                        <text x="67" y="32" fill="white" font-family="Arial" font-weight="bold" font-size="20">E</text>
+                    </g>
+                    <g>
+                        <rect x="100" y="10" width="40" height="30" rx="3" fill="#e74c3c"/>
+                        <text x="113" y="32" fill="white" font-family="Arial" font-weight="bold" font-size="20">C</text>
+                    </g>
+                    <rect x="145" y="10" width="70" height="30" rx="3" fill="white" stroke="#e74c3c" stroke-width="2"/>
+                    <text x="155" y="32" fill="#333" font-family="Arial" font-weight="bold" font-size="16">Maker</text>
+                </svg>
+            </div>
+            <p class="text-lg text-gray-700 mb-6">
+                <span class="text-red-600 font-medium">R</span>apid prototype 
+                <span class="text-red-600 font-medium">E</span>ffective(Efficient)
+                <span class="text-red-600 font-medium">C</span>ontents maker
+            </p>
+        </header>
+
+        <div class="analysis-tabs flex items-center justify-end gap-2 my-8 w-full">
+            <!-- 분석방법 탭 (원형으로 변경) -->
+            <div class="tab-item">
+                <button id="analysis-method-btn" class="tab-btn square-btn bg-orange-600 text-white">
+                    <span class="icon-wrapper">
+                        <span class="circle-icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </span>
+                    <span class="tab-text">원고형태</span>
+                </button>
+            </div>
+            
+            <!-- 구분점 -->
+            <div class="tab-separator">•</div>
+            
+            <!-- 이론기반 접근 탭 (활성화) -->
+            <div class="tab-item">
+                <button id="theory-approach-btn" class="tab-btn rounded-full bg-white border-2 border-orange-500 text-gray-700 active">
+                    <span class="tab-text">학문</span>
+                    <span class="check-icon">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </button>
+            </div>
+            
+            <!-- 구분점 -->
+            <div class="tab-separator">•</div>
+            
+            <!-- 맥락기반 접근 탭 (비활성화) -->
+            <div class="tab-item">
+                <button id="context-approach-btn" class="tab-btn rounded-full bg-white border-2 border-blue-300 text-gray-700">
+                    <span class="tab-text">일반</span>
+                    <span class="check-icon">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <main>
+            <!-- 업로드 섹션 -->
+            <div id="upload-section" class="bg-white rounded-2xl shadow-md p-6 mb-8">
+
+                
+                <!-- 통합 업로드 섹션 -->
+                <div id="unified-upload-section">
+                    <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-3xl p-12 flex flex-col items-center justify-center h-72 transition-colors cursor-pointer hover:border-red-500 hover:bg-gray-50">
+                        <div class="w-24 h-24 mb-4 flex items-center justify-center">
+                            <!-- 파일 아이콘 -->
+                            <img src="https://img.icons8.com/color/96/000000/microsoft-powerpoint-2019--v1.png" 
+     alt="PowerPoint Icon" width="80" height="80">
+                        </div>
+                        <div class="drop-zone__prompt text-center">
+                            <p class="mb-2 font-medium text-gray-700">1)PPT 파일 드래그 or 2)클릭하여 업로드</p>
+                            <p class="text-sm text-gray-500">지원 형식: .ppt, .pptx, .md</p>
+                            <input type="file" id="file-input" class="drop-zone__input hidden" accept=".ppt,.pptx,.md">
+                        </div>
+                    </div>
+                    
+                    <!-- 기존 옵션 (숨김 처리) -->
+                    <div class="hidden">
+                        <div class="options flex items-center justify-center mt-6 gap-4">
+                            <label for="difficulty" class="font-medium">난이도 선택:</label>
+                            <select id="difficulty" class="difficulty-select border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                <option value="BASIC">기초</option>
+                                <option value="INTERMEDIATE">중급</option>
+                                <option value="ADVANCED">고급</option>
+                                <option value="ACADEMIC" selected>학문적</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="analysis-type" class="font-medium block mb-2">분석 방식:</label>
+                            <select id="analysis-type" class="analysis-select border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                <option value="standard">통찰력과 맥락 확장</option>
+                                <option value="academic" selected>학문적 정확성</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- 처리 중 섹션 -->
+<div id="processing" class="bg-white rounded-2xl shadow-md p-6 mb-8 hidden">
+    <div class="processing__status text-center mb-10 mt-[8%]">
+        <div class="spinner mx-auto mb-4"></div>
+        <div id="status-text" class="text-lg font-medium">슬라이드 내용 분석 중...</div>
+        <div id="progress-percentage" class="text-lg font-medium">60% 완료</div>
+    </div>
+
+    <!-- 진행 상태 표시 영역 -->
+    <div class="progress-container relative">
+        <!-- 진행 바 -->
+        <div id="progress-bar" class="w-full rounded-full h-2.5">
+            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div>
+        </div>
+        
+        <!-- 단계 숫자 표시 (육각형) -->
+        <div class="step-numbers">
+            <div class="step-number step-1 hexagon bg-blue-500 text-white">1</div>
+            <div class="step-number step-2 hexagon bg-gray-700 text-white">2</div>
+        </div>
+        
+        <!-- 말풍선 -->
+        <div class="step-bubbles">
+            <div class="step-bubble step-1 active">
+                <div class="bubble-content">내용분석</div>
+            </div>
+            <div class="step-bubble step-2">
+                <div class="bubble-content">스크립트 생성</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 로그 토글 버튼 -->
+    <div class="text-center  hidden">
+        <button id="show-logs" class="text-gray-500 text-sm flex items-center mx-auto">
+            <span class="mr-1">▶</span> 상세 로그 보기
+        </button>
+    </div>
+    
+    <!-- 로그 컨테이너 (기본 숨김) -->
+    <div class="logs-container mt-4 hidden">
+        <div class="p-3 bg-gray-50 rounded-md max-h-40 overflow-y-auto">
+            <pre id="process-logs" class="text-xs font-mono text-gray-600 whitespace-pre-wrap"></pre>
+        </div>
+    </div>
+</div>
+            <!-- 결과 섹션 -->
+            <div id="results" class="bg-white rounded-2xl shadow-md p-6 hidden">
+                <div class="results-header flex justify-end items-center mb-6 sticky top-0 bg-white z-10 py-4 shadow-sm">
+                    <div class="flex gap-4">
+                        <!-- 스크립트 다운로드 버튼 -->
+                        <button id="download-script-btn" class="bg-pink-200 hover:bg-pink-300 text-gray-800 px-4 py-2 rounded-md flex items-center transition-all">
+                            <i class="fas fa-download mr-2"></i> 스크립트 저장
+                        </button>
+                        
+                        <!-- 통합된 콘텐츠 생성 및 다운로드 버튼 -->
+                        <button id="unified-content-generation-btn" class="bg-pink-200 hover:bg-pink-300 text-gray-800 px-4 py-2 rounded-md flex items-center transition-all">
+                            <i class="fas fa-magic mr-2"></i> 콘텐츠 생성 및 다운로드
+                        </button>
+                    </div>
+                </div>
+
+                <div id="slides-container" class="slides-container grid gap-6">
+                    <!-- 슬라이드 항목들이 여기에 동적으로 추가됨 -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-12 text-center text-gray-600 text-sm">
+            <p>Ⓒ ㈜유비온 Inc. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- 템플릿 (슬라이드 항목 렌더링용) -->
+    <template id="slide-item-template">
+        <div class="slide-item border border-gray-200 rounded-lg overflow-hidden">
+            <div class="slide-header bg-gray-50 px-4 py-3 flex justify-between items-center border-b border-gray-200">
+                <div class="slide-header-left flex items-center">
+                    <h3 class="font-bold slide-number">슬라이드 1</h3>
+                </div>
+                <div class="slide-header-right flex items-center gap-3">
+                    <button
+                        class="generate-audio-button bg-red-500 text-white px-3 py-1 rounded flex items-center text-sm">
+                        <i class="fas fa-volume-up mr-2"></i> 음성 생성
+                    </button>
+                    <div class="audio-status hidden items-center">
+                        <div class="spinner"></div>
+                        <span class="ml-2">생성 중...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-content-wrapper flex">
+                <div class="slide-preview w-1/4 border-r border-gray-200 p-4 flex items-center justify-center">
+                    <img src="" alt="슬라이드 미리보기" class="slide-thumbnail max-w-full max-h-40">
+                </div>
+                <div class="slide-content-container w-3/4">
+                    <div class="audio-container hidden p-4 bg-gray-50 border-b border-gray-200">
+                        <!-- 오디오 플레이어가 여기에 추가됨 -->
+                    </div>
+                    <div class="slide-content p-4">
+                        <div class="view-mode">
+                            <!-- 스크립트 내용이 여기에 들어갑니다 -->
+                        </div>
+                        <textarea
+                            class="edit-mode hidden w-full min-h-[200px] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent mt-2">
+                            <!-- 편집 가능한 내용이 여기에 들어갑니다 -->
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- 슬라이드 재생성 모달 템플릿 -->
+    <template id="regenerate-modal-template">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                <h3 class="text-xl font-bold mb-4">슬라이드 재생성 옵션</h3>
+                
+                <div class="mb-4">
+                    <p class="font-medium mb-2">원하는 방향:</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="direction" value="simplify" class="mr-2">
+                            <span>축약: 간결한 나레이션</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="direction" value="normal" class="mr-2" checked>
+                            <span>보통: 기본 나레이션</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="direction" value="deepen" class="mr-2">
+                            <span>보충: 추가 설명이 있는 나레이션</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="direction" value="academic" class="mr-2">
+                            <span>학술: 학문적 내용+문헌 출처 추가</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="direction" value="practical" class="mr-2">
+                            <span>사례: 다양한 사례를 추가한 나레이션</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="font-medium block mb-2">+ 추가되어야 할 내용 입력:</label>
+                    <textarea id="regenerate-instructions" class="w-full p-2 border border-gray-300 rounded-md" rows="4" placeholder="나레이션에서 반드시 삽입되어야 할 내용에 대해 기입하세요. 예: '인공지능의 윤리적 측면을 더 강조해주세요'"></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-2">
+                    <button class="cancel-btn px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">취소</button>
+                    <button class="confirm-btn px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">재생성</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <script src="js/index.js"></script>
+    <script src="js/image-preview.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+{
+  "slides": [
+    {
+      "slideNumber": 1,
+      "text": [
+        "2025.1.21~22",
+        "김 보 은",
+        "㈜유비온 미래교육연구소 연구소장",
+        "/",
+        "인천대학교 교육대학원 겸임교수",
+        "교육관점에서의 에듀테크"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-01.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 2,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-02.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 3,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-03.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 4,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-04.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 5,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습",
+        "출처",
+        ": https://sites.tufts.edu/emunhripresentation/",
+        "Conventional classroom(",
+        "통상적 수업",
+        ")",
+        "Mastery learning(",
+        "완전학습",
+        ")",
+        "=",
+        "통상적 수업",
+        "+",
+        "형성적 평가",
+        "+",
+        "피드백",
+        "+",
+        "교정학습 처치",
+        "1-on-1 Mentoship(",
+        "개인지도수업",
+        ")",
+        "성취도 및 과제집중 시간량 분포",
+        "-",
+        "개인지도",
+        "&gt;",
+        "완전학습",
+        "&gt;",
+        "통상적 수업 순",
+        "블룸의 완전학습모형",
+        "_2",
+        "시그마의 문제",
+        "-",
+        "개인지도조건이 가장 긍정적",
+        ",",
+        "통상적 수업조건이 가장",
+        "부정적",
+        "단",
+        ",",
+        "개인지도수업의 경우",
+        "효율성 문제",
+        "발생"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-05.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 6,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습",
+        "지능형 학습시스템과 함께",
+        "~",
+        "피드백",
+        "동기부여",
+        "정서적 지원",
+        "실제적인 경험의 기회 제공",
+        "[",
+        "하이테크",
+        "]",
+        "[",
+        "하이터치",
+        "]",
+        "지식 전달 및 암기와 같은 교육",
+        "교사는 인간적인 연결"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-06.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 7,
+      "text": [
+        "1.",
+        "테크놀로지기반 학습",
+        "Q.LMS",
+        "와",
+        "Platform",
+        "은",
+        "동일한 의미이다",
+        ".",
+        "O",
+        "X"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-07.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 8,
+      "text": [
+        "2.",
+        "에듀테크 기업의 미래 및 필요역량",
+        "2023",
+        "년",
+        "(6",
+        "월",
+        ")",
+        "애플",
+        "마이크로소프트",
+        "아람코",
+        "(",
+        "사우디아라비아",
+        ")",
+        "알파벳",
+        "(",
+        "구글",
+        ")",
+        "아마존",
+        "엔비디아",
+        "버크셔해서웨어",
+        "메타",
+        "(",
+        "페이스북",
+        ")",
+        "테슬라",
+        "대만반도체",
+        "(TSMC)",
+        "2006",
+        "년",
+        "엑손모빌",
+        "GE",
+        "마이크로소프트",
+        "씨티그룹",
+        "Gazprom",
+        "중국공상은행",
+        "토요타자동차",
+        "뱅크오브아메리카",
+        "Royal Dutch Shell",
+        "BP",
+        "정유",
+        "2013",
+        "년",
+        "애플",
+        "엑손모빌",
+        "마이크로소프트",
+        "구글",
+        "버크셔해서웨어",
+        "중국공상은행",
+        "GE",
+        "존슨엔존슨",
+        "월맡트",
+        "호프만",
+        "-",
+        "라로슈",
+        "셰브론",
+        "산업 변화 세계 시가총액",
+        "10",
+        "위",
+        "출처",
+        ":",
+        "List of public corporations by market capitalization, https://en.wikipedia.org/wiki/List_of_public_corporations_by_market_capitalization"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-08.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 9,
+      "text": [
+        "2.",
+        "에듀테크 기업의 미래 및 필요역량"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-09.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 10,
+      "text": [
+        "2.",
+        "에듀테크 기업의 미래 및 필요역량",
+        "“",
+        "교육의 공공성은 최소한",
+        "Equality",
+        "를 보장하면서",
+        "최대한",
+        "Equity",
+        "를 추구하는 것",
+        "”"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-10.png"
+        }
+      ]
+    },
+    {
+      "slideNumber": 11,
+      "text": [
+        "“",
+        "제반지식을",
+        "적용하고 변형하는 능력이 중요",
+        "“",
+        "2.",
+        "에듀테크 기업의 미래 및 필요역량"
+      ],
+      "images": [
+        {
+          "path": "d:/REC_Maker_local_BETAv1_2025_0410/sessions/0c3c32e95b14f39537416794d9a13b1f/extracted_content/slide-11.png"
+        }
+      ]
+    }
+  ]
+}

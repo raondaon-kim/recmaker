@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC Maker</title>
+    <!-- Tailwind CSS 추가 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 커스텀 스타일 -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-primary mb-2">REC Maker</h1>
+            <p class="text-gray-600">PPT에서 강의 스크립트와 음성과 영상을 자동 생성하세요</p>
+            <!-- 세션 ID 표시 영역 추가 -->
+           <!--
+            <div id="session-info" class="mt-4 hidden">
+                <div class="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700">
+                    <span class="mr-2">세션 ID:</span>
+                    <code id="session-id-display" class="bg-white px-2 py-1 rounded mr-2 font-mono text-sm"></code>
+                    <button id="copy-session-link" class="text-blue-600 hover:text-blue-800 focus:outline-none">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            -->
+        </header>
+
+        <main>
+            <!-- 업로드 섹션 -->
+            <div id="upload-section" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="mb-4">
+                    <h2 class="text-xl font-semibold mb-2">PPT 파일 또는 스크립트 업로드</h2>
+                    <div class="flex space-x-4 mb-4">
+                        <button id="upload-ppt-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center">
+                            <i class="fas fa-file-powerpoint mr-2"></i> PPT 파일 업로드
+                        </button>
+                        <button id="upload-script-btn" class="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i> 스크립트 파일 업로드
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- PPT 업로드 섹션 -->
+                <div id="ppt-upload-section">
+                    <div id="drop-zone" class="border-2 border-dashed border-primary rounded-lg p-8 flex flex-col items-center justify-center h-64 transition-colors cursor-pointer hover:bg-blue-50">
+                        <i class="fas fa-file-powerpoint text-5xl text-primary mb-4"></i>
+                        <div class="drop-zone__prompt text-center">
+                            <p class="mb-2 font-medium">PPT 파일을 드래그하거나 클릭하여 업로드</p>
+                            <p class="text-sm text-gray-500">지원 형식: .ppt, .pptx</p>
+                            <input type="file" id="file-input" class="drop-zone__input hidden" accept=".ppt,.pptx">
+                        </div>
+                    </div>
+            
+                    <div class="options flex items-center justify-center mt-6 gap-4">
+                        <label for="difficulty" class="font-medium">난이도 선택:</label>
+                        <select id="difficulty" class="difficulty-select border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="BASIC">기초</option>
+                            <option value="INTERMEDIATE">중급</option>
+                            <option value="ADVANCED">고급</option>
+                            <option value="ACADEMIC" selected>학문적</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="analysis-type" class="font-medium block mb-2">분석 방식:</label>
+                        <select id="analysis-type" class="analysis-select border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="standard">통찰력과 맥락 확장</option>
+                            <option value="academic" selected>학문적 정확성</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 스크립트 업로드 섹션 - 처음에는 숨김 -->
+                <div id="script-upload-section" class="hidden">
+                    <div id="script-drop-zone" class="border-2 border-dashed border-emerald-500 rounded-lg p-8 flex flex-col items-center justify-center h-64 transition-colors cursor-pointer hover:bg-emerald-50">
+                        <i class="fas fa-file-alt text-5xl text-emerald-500 mb-4"></i>
+                        <div class="drop-zone__prompt text-center">
+                            <p class="mb-2 font-medium">스크립트 파일을 드래그하거나 클릭하여 업로드</p>
+                            <p class="text-sm text-gray-500">지원 형식: .md</p>
+                            <input type="file" id="script-file-input" class="drop-zone__input hidden" accept=".md">
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2 text-center">※ 이전에 다운로드한 스크립트 파일을 수정한 후 업로드하세요</p>
+                </div>
+            </div>
+            
+
+            <!-- 처리 중 섹션 -->
+            <div id="processing" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
+                <div class="processing__status text-center mb-6">
+                    <div class="spinner mx-auto mb-4"></div>
+                    <div id="status-text" class="text-lg font-medium">처리 중...</div>
+                    <div id="progress-percentage" class="text-sm text-gray-600 mt-2">0% 완료</div>
+                    <!--<div id="estimated-time" class="text-sm text-gray-600">예상 시간: 계산 중...</div>-->
+                    <div id="progress-detail" class="text-sm text-gray-600 mt-2 hidden"></div>
+                </div>
+
+                <div class="mb-6">
+                    <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                        <div class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+
+                    <div class="logs-container mt-4 hidden">
+                        <details>
+                            <summary class="text-sm font-medium text-gray-700 cursor-pointer hover:text-primary">
+                                상세 로그 보기
+                            </summary>
+                            <div class="mt-2 p-3 bg-gray-50 rounded-md max-h-40 overflow-y-auto">
+                                <pre id="process-logs"
+                                    class="text-xs font-mono text-gray-600 whitespace-pre-wrap"></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div id="progress-steps" class="progress-steps">
+                    <div class="step" data-step="extract">
+                        <span class="step-number">1</span>
+                        <span class="step-text">콘텐츠 추출</span>
+                    </div>
+                    <div class="step" data-step="analyze">
+                        <span class="step-number">2</span>
+                        <span class="step-text">내용 분석</span>
+                    </div>
+                    <div class="step" data-step="generate">
+                        <span class="step-number">3</span>
+                        <span class="step-text">스크립트 생성</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결과 섹션 -->
+            <div id="results" class="bg-white rounded-lg shadow-md p-6 hidden">
+                <div class="results-header flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold"></h2>
+                    <div class="flex gap-4">
+                        <button id="download-script-btn"
+                            class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 flex items-center">
+                            <i class="fas fa-download mr-2"></i> 스크립트 다운로드
+                        </button>
+                        <button
+                            class="merge-audio-button bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center">
+                            <i class="fas fa-headphones mr-2"></i> 음성 다운로드
+                        </button>
+                    </div>
+                </div>
+
+                <div id="slides-container" class="slides-container grid gap-6">
+                    <!-- 슬라이드 항목들이 여기에 동적으로 추가됨 -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-12 text-center text-gray-600 text-sm">
+            <p>© 2025 REC Maker. 모든 권리 보유.</p>
+        </footer>
+    </div>
+
+    <!-- 템플릿 (슬라이드 항목 렌더링용) -->
+    <template id="slide-item-template">
+        <div class="slide-item border border-gray-200 rounded-lg overflow-hidden">
+            <div class="slide-header bg-gray-50 px-4 py-3 flex justify-between items-center border-b border-gray-200">
+                <div class="slide-header-left flex items-center">
+                    <h3 class="font-bold slide-number">슬라이드 1</h3>
+                </div>
+                <div class="slide-header-right flex items-center gap-3">
+                    <button
+                        class="generate-audio-button bg-primary text-white px-3 py-1 rounded flex items-center text-sm">
+                        <i class="fas fa-volume-up mr-2"></i> 음성 생성
+                    </button>
+                    <div class="audio-status hidden items-center">
+                        <div class="spinner"></div>
+                        <span class="ml-2">생성 중...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-content-wrapper flex">
+                <div class="slide-preview w-1/4 border-r border-gray-200 p-4 flex items-center justify-center">
+                    <img src="" alt="슬라이드 미리보기" class="slide-thumbnail max-w-full max-h-40">
+                </div>
+                <div class="slide-content-container w-3/4">
+                    <div class="audio-container hidden p-4 bg-gray-50 border-b border-gray-200">
+                        <!-- 오디오 플레이어가 여기에 추가됨 -->
+                    </div>
+                    <div class="slide-content p-4">
+                        <div class="view-mode">
+                            <!-- 스크립트 내용이 여기에 들어갑니다 -->
+                        </div>
+                        <textarea
+                            class="edit-mode hidden w-full min-h-[200px] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent mt-2">
+                            <!-- 편집 가능한 내용이 여기에 들어갑니다 -->
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- 슬라이드 재생성 모달 템플릿 -->
+<template id="regenerate-modal-template">
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <h3 class="text-xl font-bold mb-4">슬라이드 재생성 옵션</h3>
+        
+        <div class="mb-4">
+          <p class="font-medium mb-2">원하는 방향:</p>
+          <div class="space-y-2">
+            <label class="flex items-center">
+                <input type="radio" name="direction" value="simplify" class="mr-2">
+                <span>축약</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="direction" value="normal" class="mr-2" checked>
+              <span>기본</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="direction" value="deepen" class="mr-2">
+              <span>보충</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="direction" value="academic" class="mr-2">
+              <span>학술</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="direction" value="practical" class="mr-2">
+              <span>사례</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <label class="font-medium block mb-2">+ 추가되어야 할 내용 입력:</label>
+          <textarea id="regenerate-instructions" class="w-full p-2 border border-gray-300 rounded-md" rows="4" placeholder="예: '인공지능의 윤리적 측면을 더 강조해주세요'"></textarea>
+        </div>
+        
+        <div class="flex justify-end space-x-2">
+          <button class="cancel-btn px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">취소</button>
+          <button class="confirm-btn px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">재생성</button>
+        </div>
+      </div>
+    </div>
+  </template>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
