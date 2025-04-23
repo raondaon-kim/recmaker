@@ -92,7 +92,7 @@ class AudioGenerator {
             
             // 이전 방식으로 API 직접 호출 (elevenlabs 라이브러리 대신)
             const response = await fetch(
-                `https://api.elevenlabs.io/v1/text-to-speech/v4AgT8B47uRCgbIYBLO2`,  // 음성 ID
+                `https://api.elevenlabs.io/v1/text-to-speech/`,  // 음성 ID
                 {
                     method: 'POST',
                     headers: {
